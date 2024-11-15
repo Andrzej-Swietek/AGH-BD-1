@@ -4,8 +4,11 @@
     <file url="file://$PROJECT_DIR$/ERD_01/erd01_queries.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/ERD_01/erd01_v2.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/ERD_01/script.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/ERD_02/script.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/Lab03/Lab03.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/Lab04/Lab04.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/Lab05/Lab05.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/Lab06/lab06.sql" dialect="PostgreSQL" />
     <file url="PROJECT" dialect="PostgreSQL" />
   </component>
 </project>
