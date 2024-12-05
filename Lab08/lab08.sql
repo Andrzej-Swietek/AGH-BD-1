@@ -338,11 +338,9 @@ INSERT INTO lab08.wykladowca_kurs (wykladowca_id, kurs_id) VALUES
 (1, 6),
 (1, 7),
 (1, 8),
-(1, 1),
-(1, 2);
-
-INSERT INTO lab08.wykladowca_kurs (wykladowca_id, kurs_id) VALUES
 (1, 3),
+(1, 2),
+(1, 5),
 (1, 4);
 
 -- Poprostu mi dojsc do liczby podzielnej przez 3
