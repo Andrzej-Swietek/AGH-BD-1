@@ -1,0 +1,32 @@
+[
+  {
+    "kurs":"Algorytmy",
+    "ilosc_prowadzacych":1,
+    "prowadzacy":[
+      {
+        "nazwisko":"Kowalski"
+      }
+    ],
+    "stan":"ukonczony"
+  },
+  {
+    "kurs":"Algorytmy",
+    "ilosc_prowadzacych":1,
+    "prowadzacy": [
+      {
+        "nazwisko":"Nowak"
+      }
+    ],
+    "stan":"ukonczony"
+  },
+  {
+    "kurs":"Algorytmy",
+    "ilosc_prowadzacych":1,
+    "prowadzacy":[
+      {
+        "nazwisko":"Wiśniewski"
+      }
+    ],
+    "stan":"ukonczony"
+  }
+]

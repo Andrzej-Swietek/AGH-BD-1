@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "test.h"
+
+EXEC SQL include sqlca;
+EXEC SQL whenever sqlwarning sqlprint;
+EXEC SQL whenever sqlerror do Prnt();
+
+
+void Prnt() {
+    fprintf(stderr, "*******************************************\n");
+    fprintf(stderr, "Fatal Error\n");
+    sqlprint();
+    fprintf(stderr, "*******************************************\n");
+}
+
+EXEC SQL BEGIN DECLARE SECTION;
+    char dbname[1024];
+    char db[200];//*db
+    char usr[15];//*usr
+    char pas[30];//*pas
+
+    int wykladowca_id;
+    char kurs[100];
+    int ilosc_prowadzacych;
+    char nazwisko[100];
+    char stan[15];
+EXEC SQL END DECLARE SECTION;
+
+int main(int argc, char *argv[]) {
+    if (argc < 2) {
+        fprintf(stderr, "Usage: %s <wykladowca_id>\n", argv[0]);
+        return 1;
+    }
+
+    strncpy(db,dbase,200);//db = dbase
+    strncpy(usr,user,15);//usr = user
+    strncpy(pas,pass,30);//pas = pass
+    wykladowca_id = atoi(argv[1]);
+
+    EXEC SQL CONNECT TO :db USER :usr USING :pas;
+    if (sqlca.sqlcode < 0) {
+        Prnt();
+        return 1;
+    }
+
+    EXEC SQL SELECT current_database() INTO :dbname;
+    printf("current database=%s \n", dbname);
+
+    printf("[");
+
+    EXEC SQL DECLARE kurs_cursor CURSOR FOR
+        SELECT
+            k.nazwa, COUNT(wk.wykladowca_id), w.nazwisko,
+            CASE WHEN k.koniec IS NULL THEN 'nieukonczony' ELSE 'ukonczony' END
+        FROM
+            lab09.wykladowca_kurs wk
+        JOIN
+            lab09.kurs k ON wk.kurs_id = k.kurs_id
+        JOIN
+            lab09.wykladowca w ON wk.wykladowca_id = w.wykladowca_id
+        WHERE
+            wk.kurs_id IN (SELECT kurs_id FROM lab09.wykladowca_kurs WHERE wykladowca_id = :wykladowca_id)
+        GROUP BY
+            k.nazwa, k.koniec, w.nazwisko
+        ORDER BY
+            k.nazwa;
+
+    EXEC SQL OPEN kurs_cursor;
+
+    int is_first = 1;
+    while (1) {
+        EXEC SQL FETCH kurs_cursor INTO :kurs, :ilosc_prowadzacych, :nazwisko, :stan;
+        if (sqlca.sqlcode == 100) break; // No more rows
+        if (sqlca.sqlcode < 0) {
+            Prnt();
+            break;
+        }
+
+        // Output JSON
+        if (!is_first) printf(",");
+        is_first = 0;
+        printf("{\"kurs\":\"%s\",\"ilosc_prowadzacych\":%d,\"prowadzacy\":[{\"nazwisko\":\"%s\"}],\"stan\":\"%s\"}",
+               kurs, ilosc_prowadzacych, nazwisko, stan);
+    }
+
+    printf("]\n");
+
+    EXEC SQL CLOSE kurs_cursor;
+    EXEC SQL DISCONNECT ALL;
+
+    return 0;
+}
