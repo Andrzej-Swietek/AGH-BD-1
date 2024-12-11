@@ -1,3 +1,4 @@
+DROP SCHEMA IF EXISTS erd02 CASCADE;
 CREATE SCHEMA erd02;
 
 
@@ -66,16 +67,16 @@ INSERT INTO erd02.Malzenstwo (malzonek1_id, malzonek2_id, data_slubu) VALUES
 -- Relacje pokrewieństwa
 INSERT INTO erd02.Pokrewienstwo (rodzic_id, dziecko_id) VALUES
 -- Rodzice Piotra i Marka
-(1, 3), (2, 3),  -- Jan i Anna są rodzicami Piotra
-(1, 11), (2, 11),  -- Jan i Anna są rodzicami Marka
+(1, 3), (2, 3),      -- Jan i Anna są rodzicami Piotra
+(1, 11), (2, 11),    -- Jan i Anna są rodzicami Marka
 
 -- Rodzice Marii i Karoliny
-(7, 4), (8, 4),  -- Zofia i Stanisław są rodzicami Marii
-(7, 12), (8, 12),  -- Zofia i Stanisław są rodzicami Karoliny
+(7, 4), (8, 4),      -- Zofia i Stanisław są rodzicami Marii
+(7, 12), (8, 12),    -- Zofia i Stanisław są rodzicami Karoliny
 
 -- Rodzice Adama, Ewy, Tomasza, Anny
-(3, 5), (4, 5),  -- Piotr i Maria są rodzicami Adama
-(3, 6), (4, 6),  -- Piotr i Maria są rodzicami Ewy
+(3, 5), (4, 5),      -- Piotr i Maria są rodzicami Adama
+(3, 6), (4, 6),      -- Piotr i Maria są rodzicami Ewy
 (11, 13), (12, 13),  -- Marek i Karolina są rodzicami Tomasza
 (11, 14), (12, 14);  -- Marek i Karolina są rodzicami Anny
 
