@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
 
             result res { trsxn.exec("SELECT id, fname, lname FROM lab10.person") };
             for (auto row: res)
-            std::cout << row["id"].as<int>() << " " << row[2].c_str() << " " << row[1].c_str() << std::endl;
+                std::cout << row["id"].as<int>() << " " << row[2].c_str() << " " << row[1].c_str() << std::endl;
 
             // dla polecenia select niekoniecznie
             trsxn.commit();
